@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Zombie" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Zombie" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="src/Animation" />
+					<Add directory="src/Camera" />
+					<Add directory="src/Characters" />
+					<Add directory="src/Collision" />
+					<Add directory="src/Core" />
+					<Add directory="src/Graphics" />
+					<Add directory="src/Inputs" />
+					<Add directory="src/Timer" />
+					<Add directory="src/Object" />
+					<Add directory="src/Physics" />
+					<Add directory="src/Map" />
+					<Add directory="src/Menu" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Zombie" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="src/Animation" />
+					<Add directory="src/Camera" />
+					<Add directory="src/Characters" />
+					<Add directory="src/Collision" />
+					<Add directory="src/Core" />
+					<Add directory="src/Graphics" />
+					<Add directory="src/Inputs" />
+					<Add directory="src/Timer" />
+					<Add directory="src/Object" />
+					<Add directory="src/Physics" />
+					<Add directory="src/Map" />
+					<Add directory="src/Menu" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Animation/Animation.cpp" />
+		<Unit filename="src/Animation/Animation.h" />
+		<Unit filename="src/Camera/Camera.cpp" />
+		<Unit filename="src/Camera/Camera.h" />
+		<Unit filename="src/Characters/Boss.cpp" />
+		<Unit filename="src/Characters/Boss.h" />
+		<Unit filename="src/Characters/Bullet.cpp" />
+		<Unit filename="src/Characters/Bullet.h" />
+		<Unit filename="src/Characters/Character.h" />
+		<Unit filename="src/Characters/Enemy.cpp" />
+		<Unit filename="src/Characters/Enemy.h" />
+		<Unit filename="src/Characters/Explosion.cpp" />
+		<Unit filename="src/Characters/Explosion.h" />
+		<Unit filename="src/Characters/Knight.cpp" />
+		<Unit filename="src/Characters/Knight.h" />
+		<Unit filename="src/Characters/Zombie.cpp" />
+		<Unit filename="src/Characters/Zombie.h" />
+		<Unit filename="src/Collision/CollisionHandler.cpp" />
+		<Unit filename="src/Collision/CollisionHandler.h" />
+		<Unit filename="src/Core/Engine.cpp" />
+		<Unit filename="src/Core/Engine.h" />
+		<Unit filename="src/Graphics/TextureManager.cpp" />
+		<Unit filename="src/Graphics/TextureManager.h" />
+		<Unit filename="src/Inputs/Input.cpp" />
+		<Unit filename="src/Inputs/Input.h" />
+		<Unit filename="src/Map/Map.cpp" />
+		<Unit filename="src/Map/Map.h" />
+		<Unit filename="src/Menu/Menu.cpp" />
+		<Unit filename="src/Menu/Menu.h" />
+		<Unit filename="src/Object/GameObject.h" />
+		<Unit filename="src/Object/IObject.h" />
+		<Unit filename="src/Physics/Collider.h" />
+		<Unit filename="src/Physics/Point.h" />
+		<Unit filename="src/Physics/RigidBody.h" />
+		<Unit filename="src/Physics/Transform.h" />
+		<Unit filename="src/Physics/Vector2D.h" />
+		<Unit filename="src/Timer/Timer.cpp" />
+		<Unit filename="src/Timer/Timer.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

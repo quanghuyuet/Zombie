@@ -1,0 +1,250 @@
+# depslib dependency file v1.0
+1744341215 source:e:\zombie\zombie\src\animation\animation.cpp
+	"Animation.h"
+	"TextureManager.h"
+
+1744341215 e:\zombie\zombie\src\animation\animation.h
+	<iostream>
+	<string>
+	<SDL.h>
+	<SDL_image.h>
+
+1744368601 e:\zombie\zombie\src\graphics\texturemanager.h
+	<string>
+	"SDL.h"
+	<map>
+
+1743692652 source:e:\zombie\zombie\main.cpp
+	"Engine.h"
+	"Timer.h"
+
+1744568982 e:\zombie\zombie\src\core\engine.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"Enemy.h"
+	"Knight.h"
+	<iostream>
+	"Zombie.h"
+	"Map.h"
+	"Boss.h"
+	"Menu.h"
+	"Explosion.h"
+
+1744514867 e:\zombie\zombie\src\characters\enemy.h
+	<SDL.h>
+	<vector>
+	<string>
+	"Character.h"
+	"Collider.h"
+	"Animation.h"
+	"Vector2D.h"
+	"Engine.h"
+	"Camera.h"
+	"Bullet.h"
+	"TextureManager.h"
+	"Timer.h"
+	"CollisionHandler.h"
+
+1744529827 e:\zombie\zombie\src\characters\knight.h
+	<iostream>
+	"Character.h"
+	"GameObject.h"
+	"Animation.h"
+	"RigidBody.h"
+	"Vector2D.h"
+	"Collider.h"
+	"Point.h"
+	"Transform.h"
+
+1744465874 e:\zombie\zombie\src\characters\character.h
+	<string>
+	<iostream>
+	"GameObject.h"
+	"Vector2D.h"
+	"Transform.h"
+
+1743692314 e:\zombie\zombie\src\object\gameobject.h
+	"IObject.h"
+	"Transform.h"
+	<string>
+	<iostream>
+	<SDL.h>
+	"Point.h"
+
+1743692216 e:\zombie\zombie\src\object\iobject.h
+
+1744490490 e:\zombie\zombie\src\physics\transform.h
+	"Vector2D.h"
+
+1744341215 e:\zombie\zombie\src\physics\vector2d.h
+	<bits/stdc++.h>
+
+1744341215 e:\zombie\zombie\src\physics\point.h
+	<iostream>
+
+1744275282 e:\zombie\zombie\src\physics\rigidbody.h
+	"Vector2D.h"
+
+1743845722 e:\zombie\zombie\src\physics\collider.h
+	<SDL.h>
+	<iostream>
+
+1743692079 e:\zombie\zombie\src\inputs\input.h
+	<SDL.h>
+	"Engine.h"
+
+1743864249 e:\zombie\zombie\src\camera\camera.h
+	<SDL.h>
+	<iostream>
+	"Vector2D.h"
+	"Point.h"
+	"Engine.h"
+	"RigidBody.h"
+
+1743699011 e:\zombie\zombie\src\collision\collisionhandler.h
+	<SDL.h>
+	<vector>
+	"Map.h"
+
+1744341215 e:\zombie\zombie\src\map\map.h
+	<SDL.h>
+	<vector>
+	"Camera.h"
+
+1744341215 e:\zombie\zombie\src\timer\timer.h
+	<SDL.h>
+
+1744340666 e:\zombie\zombie\src\characters\zombie.h
+	"Character.h"
+	"RigidBody.h"
+	"Collider.h"
+	"Animation.h"
+	"Vector2D.h"
+	"Knight.h"
+	"CollisionHandler.h"
+
+1743747548 source:e:\zombie\zombie\src\camera\camera.cpp
+	"Camera.h"
+
+1744643193 source:e:\zombie\zombie\src\characters\enemy.cpp
+	"Enemy.h"
+
+1744643499 source:e:\zombie\zombie\src\characters\knight.cpp
+	"Knight.h"
+	<iostream>
+	"GameObject.h"
+	"Character.h"
+	<SDL.h>
+	<SDL_image.h>
+	"TextureManager.h"
+	"Animation.h"
+	"RigidBody.h"
+	"Input.h"
+	"Camera.h"
+	"CollisionHandler.h"
+	"Timer.h"
+	"Enemy.h"
+	"Zombie.h"
+	"Engine.h"
+	<SDL_ttf.h>
+
+1743925570 source:e:\zombie\zombie\src\graphics\texturemanager.cpp
+	"TextureManager.h"
+	"Engine.h"
+	"Camera.h"
+
+1744642257 source:e:\zombie\zombie\src\characters\zombie.cpp
+	"Zombie.h"
+	"Engine.h"
+	"CollisionHandler.h"
+	"Timer.h"
+	"Camera.h"
+
+1744341215 source:e:\zombie\zombie\src\inputs\input.cpp
+	"Input.h"
+	"Engine.h"
+
+1744341215 source:e:\zombie\zombie\src\map\map.cpp
+	"Map.h"
+	<iostream>
+	<fstream>
+	<SDL_image.h>
+	<SDL.h>
+
+1744643551 source:e:\zombie\zombie\src\core\engine.cpp
+	"Engine.h"
+	"TextureManager.h"
+	"Character.h"
+	<iostream>
+	<string>
+	<cmath>
+	"Input.h"
+	"Timer.h"
+	"Camera.h"
+	"GameObject.h"
+	"algorithm"
+	<SDL_ttf.h>
+
+1743692173 source:e:\zombie\zombie\src\timer\timer.cpp
+	"Timer.h"
+
+1743699011 source:e:\zombie\zombie\src\collision\collisionhandler.cpp
+	"CollisionHandler.h"
+
+1744514740 e:\zombie\zombie\src\characters\bullet.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+	"Vector2D.h"
+	"Collider.h"
+	"Camera.h"
+	"TextureManager.h"
+	"Engine.h"
+
+1744642350 source:e:\zombie\zombie\src\characters\bullet.cpp
+	"Bullet.h"
+
+1744341215 source:e:\zombie\zombie\src\characters\boss.cpp
+	"Boss.h"
+	"Engine.h"
+	"CollisionHandler.h"
+	"Timer.h"
+	"Camera.h"
+
+1744279703 e:\zombie\zombie\src\characters\boss.h
+	"Character.h"
+	"RigidBody.h"
+	"Collider.h"
+	"Animation.h"
+	"Vector2D.h"
+	"Knight.h"
+	"CollisionHandler.h"
+
+1744635476 e:\zombie\zombie\src\menu\menu.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<string>
+	<vector>
+	"RigidBody.h"
+	"TextureManager.h"
+
+1744641905 source:e:\zombie\zombie\src\menu\menu.cpp
+	"Menu.h"
+	<iostream>
+
+1744466991 e:\zombie\zombie\src\characters\explosion.h
+	<SDL.h>
+	<vector>
+	"Character.h"
+
+1744471666 source:e:\zombie\zombie\src\characters\explosion.cpp
+	"Explosion.h"
+	"Boss.h"
+	<cmath>
+
+1744490787 e:\zombie\zombie\src\characters\meteor.h
+
+1744490802 source:e:\zombie\zombie\src\characters\meteor.cpp
+
