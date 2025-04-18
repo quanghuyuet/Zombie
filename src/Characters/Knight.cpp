@@ -36,8 +36,8 @@ Knight::Knight(Properties* props) : Character(props) {
     m_Animation->SetProps(m_TextureID, 1, 6, 100);
 
     m_Origin = new Point();
-    m_Health = 20;
-    m_MaxHealth = 20;
+    m_Health = 70;
+    m_MaxHealth = 70;
     m_Mana = 5;
     m_MaxMana = 5;
     m_ManaRegenTime = 4.0f; // Bộ đếm thời gian hồi MP
@@ -59,6 +59,14 @@ void Knight::TakeDamage(int damage) {
 
 void Knight::Draw() {
     m_Animation->Draw(m_Transform->X, m_Transform->Y, m_Width, m_Height, m_Flip);
+    // Debug hitbox
+    /*
+Vector2D cam = Camera::GetInstance()->GetPosition();
+SDL_Rect box = m_Collider->Get();
+box.x -= cam.X;
+box.y -= cam.Y;
+SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &box);
+*/
 
     SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
     TTF_Font* font = Engine::GetInstance()->GetFont();

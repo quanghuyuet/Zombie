@@ -10,7 +10,6 @@
 #include "Map.h"
 #include "Boss.h"
 #include "Menu.h"
-#include "Explosion.h"
 class Enemy;
 class Knight;
 class Zombie;
@@ -67,7 +66,6 @@ private:
     TTF_Font* gFont;
     Uint32 m_MenuStartTime; // Thời gian bắt đầu menu
     // Thêm cho skill vụ nổ
-    Explosion* m_Explosion;      // Instance của Explosion
     float m_SkillCooldown;       // Cooldown của skill
     bool m_SkillReady;           // Skill có sẵn sàng không
     const float SKILL_COOLDOWN_DURATION = 0.0f; // 10 giây cooldown

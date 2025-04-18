@@ -1,34 +1,60 @@
 #include "Bullet.h"
 
+// Hàm vẽ hình tròn
+void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+    for (int w = -radius; w <= radius; w++) {
+        for (int h = -radius; h <= radius; h++) {
+            int dx = w;
+            int dy = h;
+            if (dx * dx + dy * dy <= radius * radius) {
+                SDL_RenderDrawPoint(renderer, centerX + dx, centerY + dy);
+            }
+        }
+    }
+}
+
 Bullet::Bullet(float x, float y, Vector2D vel, const string& texID) {
     position = Vector2D(x, y);
     velocity = vel;
     collider = new Collider();
-    // Giả sử texture 53x53, căn giữa collider tại tâm của đạn
-    collider->Set(position.X - 2.5f, position.Y - 1.5f, 5, 3); // Kích thước nhỏ để khớp với hitbox
+    collider->Set(static_cast<int>(x), static_cast<int>(y), 32, 32);
     active = true;
     textureID = texID;
 }
 
 void Bullet::Update(float dt) {
-    if (!active) return; // Không cập nhật nếu đạn không hoạt động
+    if (!active) return;
 
     position = position + velocity * dt;
-    // Cập nhật collider, căn giữa hitbox tại tâm của đạn
-    collider->Set(position.X - 2.5f, position.Y - 1.5f, 5, 3);
+
+    const float colliderWidth = 32.0f;
+    const float colliderHeight = 32.0f;
+    collider->Set(static_cast<int>(position.X), static_cast<int>(position.Y), colliderWidth, colliderHeight);
 }
 
 void Bullet::Draw() {
     if (!active) return;
 
-    Vector2D camPos = Camera::GetInstance()->GetPosition();
-    // Chuyển đổi sang tọa độ màn hình và sử dụng static_cast để đảm bảo chính xác pixel
-    int renderX = static_cast<int>(position.X - camPos.X);
-    int renderY = static_cast<int>(position.Y - camPos.Y);
+    SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
+    Vector2D cam = Camera::GetInstance()->GetPosition();
 
-    // Giả sử texture 53x53, căn giữa texture tại position
-    renderX -= 26; // Offset để căn giữa (53 / 2 ≈ 26)
-    renderY -= 26;
+    float worldX = position.X;
+    float worldY = position.Y;
+    int renderX = static_cast<int>(worldX - cam.X);
+    int renderY = static_cast<int>(worldY - cam.Y);
 
-    TextureManager::GetInstance()->Draw(textureID, renderX, renderY, 53, 53, SDL_FLIP_NONE);
+    const int circleRadius = 16;
+    const int colliderWidth = 32;
+    const int colliderHeight = 32;
+
+    // Vẽ hình tròn màu cam đậm hơn
+    DrawCircle(renderer, renderX + circleRadius, renderY + circleRadius, circleRadius, 255, 100, 0, 255);
+/*
+    // Vẽ hộp va chạm (debug)
+    SDL_Rect hitbox = { renderX, renderY, colliderWidth, colliderHeight };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_RenderDrawRect(renderer, &hitbox);
+    */
 }

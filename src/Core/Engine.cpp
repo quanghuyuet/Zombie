@@ -20,7 +20,7 @@ Engine::Engine() {
     m_Boss = nullptr;
     m_InMenu = true;
     // Khởi tạo cho skill vụ nổ
-    m_Explosion = new Explosion();
+
     m_SkillCooldown = SKILL_COOLDOWN_DURATION;
     m_SkillReady = false;
     bool m_IsGameOver = false;
@@ -99,13 +99,14 @@ bool Engine::Init() {
     m_Boss   = new Boss(new Properties("boss", 2600, 100, 400, 400));
     // --- Add Enemies ---
     vector<Vector2D> enemyPositions = {
-        {100, 200},{800, 200}, {1200, 200}, {2000, 170}, {2600, 200}
+        {100, 200},{400,180},{800, 200}, {1200, 200}, {1600, 170},{2000, 140},{2600, 200}
+
     };
     for (auto& pos : enemyPositions)
         AddEnemy(new Enemy(new Properties("enemy", pos.X, pos.Y, 81, 71)));
     // --- Add Zombies ---
     vector<Vector2D> zombiePositions = {
-        {500, 200}, {1000, 200}, {1200, 200}, {1900, 200}, {2200, 250}
+       {260,200}, {500, 200}, {1000, 200}, {1200, 200},{700, 200},{1900, 200}, {2200, 250}
     };
     for (auto& pos : zombiePositions)
         AddZombie(new Zombie(new Properties("zombie", pos.X, pos.Y, 90, 90)));
@@ -117,10 +118,14 @@ bool Engine::Init() {
 
 void Engine::Update() {
     if (m_InMenu || m_Menu->isGamePaused()) {
-        return;  // Không cập nhật game nếu đang ở menu hoặc game bị tạm dừng
+        return;
     }
     float dt = Timer::GetInstance()->GetDeltaTime();
-    // Cập nhật cooldown skill
+
+    // Cập nhật camera trước tất cả
+    Camera::GetInstance()->Update(dt);
+
+    // Cập nhật skill cooldown
     if (!m_SkillReady) {
         m_SkillCooldown -= dt;
         if (m_SkillCooldown <= 0) {
@@ -134,7 +139,7 @@ void Engine::Update() {
 
     for (auto enemy : m_Enemies) {
         if (enemy != nullptr) {
-            enemy->Update(dt);
+            enemy->Update(dt); // Chỉ cập nhật, không vẽ
         }
     }
 
@@ -143,29 +148,28 @@ void Engine::Update() {
             zombie->Update(dt);
         }
     }
-// Kiểm tra điều kiện game over
+
+    // Kiểm tra game over
     if (!m_GameOverTriggered) {
         if (m_Player->GetHealth() <= 0 || m_Boss->IsDead()) {
             m_GameOverTriggered = true;
-            m_GameOverTriggerTime = SDL_GetTicks(); // Lưu thời điểm kích hoạt
+            m_GameOverTriggerTime = SDL_GetTicks();
         }
     } else {
-        // Kiểm tra xem đã đủ thời gian trễ chưa (ví dụ: 2000ms = 2 giây)
         if (SDL_GetTicks() - m_GameOverTriggerTime >= 3000) {
             m_IsGameOver = true;
         }
     }
-    // Chỉ truyền Boss cho Explosion
-    vector<Character*> bossList = {m_Boss};
-    m_Explosion->Update(dt, bossList);
+
+
 
     // Xóa Enemy và tăng điểm
     m_Enemies.erase(
         remove_if(m_Enemies.begin(), m_Enemies.end(),
-            [this](Enemy* enemy) { // Thêm this để truy cập m_Score
+            [this](Enemy* enemy) {
                 bool shouldRemove = (enemy->IsDead() && enemy->GetDeathTime() <= 0);
                 if (shouldRemove) {
-                    m_Score += 1; // Tăng 10 điểm cho mỗi Enemy bị giết (có thể tùy chỉnh)
+                    m_Score += 1;
                     delete enemy;
                 }
                 return shouldRemove;
@@ -175,11 +179,11 @@ void Engine::Update() {
 
     // Xóa Zombie và tăng điểm
     m_Zombies.erase(
-       remove_if(m_Zombies.begin(), m_Zombies.end(),
-            [this](Zombie* zombie) { // Thêm this để truy cập m_Score
+        remove_if(m_Zombies.begin(), m_Zombies.end(),
+            [this](Zombie* zombie) {
                 bool shouldRemove = (zombie->IsDead() && zombie->GetDeathTime() <= 0);
                 if (shouldRemove) {
-                    m_Score += 1; // Tăng 20 điểm cho mỗi Zombie bị giết (có thể tùy chỉnh)
+                    m_Score += 1;
                     delete zombie;
                 }
                 return shouldRemove;
@@ -187,7 +191,6 @@ void Engine::Update() {
         m_Zombies.end()
     );
 
-    Camera::GetInstance()->Update(dt);
     m_LevelMap->Update();
 }
 
@@ -211,17 +214,16 @@ void Engine::Render() {
         m_Player->Draw();
         m_Boss->Draw();
         for (auto enemy : m_Enemies) {
-            enemy->Draw();
+            if (enemy != nullptr) { // Thêm kiểm tra null
+                enemy->Draw();
+            }
         }
         for (auto zombie : m_Zombies) {
-            zombie->Draw();
+            if (zombie != nullptr) { // Thêm kiểm tra null
+                zombie->Draw();
+            }
         }
 
-        SDL_Rect icon = {10, 100, 32, 32};
-        SDL_SetRenderDrawColor(m_Renderer, m_SkillReady ? 255 : 100, 255, 255, 255);
-        SDL_RenderFillRect(m_Renderer, &icon);
-        SDL_Texture* explosionTexture = TextureManager::GetInstance()->GetTexture("explosion");
-        m_Explosion->Render(m_Renderer, explosionTexture);
         m_Menu->setScore(m_Score);
         m_Menu->render();
     }
@@ -272,7 +274,7 @@ void Engine::Events() {
                 if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && m_SkillReady) {
                     int x, y; SDL_GetMouseState(&x, &y);
                     Vector2D cam = Camera::GetInstance()->GetPosition();
-                    m_Explosion->Start(x + cam.X, y + cam.Y);
+
                     m_SkillReady = false; m_SkillCooldown = SKILL_COOLDOWN_DURATION;
                 }
             }
@@ -305,8 +307,8 @@ bool Engine::Clean() {
     m_LevelMap = nullptr;
     TextureManager::GetInstance()->Clean();
     delete m_Menu;
-    delete m_Explosion;
-    m_Explosion = nullptr;
+
+
     if (gFont != nullptr) {
         TTF_CloseFont(gFont);
         gFont = nullptr;

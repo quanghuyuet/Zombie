@@ -8,6 +8,7 @@
 #include "TextureManager.h"
 #include "Engine.h"
 using namespace std;
+
 class Bullet {
 public:
     Vector2D position;

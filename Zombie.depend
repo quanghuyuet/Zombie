@@ -18,7 +18,7 @@
 	"Engine.h"
 	"Timer.h"
 
-1744568982 e:\zombie\zombie\src\core\engine.h
+1744997828 e:\zombie\zombie\src\core\engine.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -29,7 +29,6 @@
 	"Map.h"
 	"Boss.h"
 	"Menu.h"
-	"Explosion.h"
 
 1744514867 e:\zombie\zombie\src\characters\enemy.h
 	<SDL.h>
@@ -127,10 +126,10 @@
 1743747548 source:e:\zombie\zombie\src\camera\camera.cpp
 	"Camera.h"
 
-1744643193 source:e:\zombie\zombie\src\characters\enemy.cpp
+1744997552 source:e:\zombie\zombie\src\characters\enemy.cpp
 	"Enemy.h"
 
-1744643499 source:e:\zombie\zombie\src\characters\knight.cpp
+1744997821 source:e:\zombie\zombie\src\characters\knight.cpp
 	"Knight.h"
 	<iostream>
 	"GameObject.h"
@@ -172,7 +171,7 @@
 	<SDL_image.h>
 	<SDL.h>
 
-1744643551 source:e:\zombie\zombie\src\core\engine.cpp
+1744997368 source:e:\zombie\zombie\src\core\engine.cpp
 	"Engine.h"
 	"TextureManager.h"
 	"Character.h"
@@ -192,7 +191,7 @@
 1743699011 source:e:\zombie\zombie\src\collision\collisionhandler.cpp
 	"CollisionHandler.h"
 
-1744514740 e:\zombie\zombie\src\characters\bullet.h
+1744993873 e:\zombie\zombie\src\characters\bullet.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
@@ -202,7 +201,7 @@
 	"TextureManager.h"
 	"Engine.h"
 
-1744642350 source:e:\zombie\zombie\src\characters\bullet.cpp
+1744994158 source:e:\zombie\zombie\src\characters\bullet.cpp
 	"Bullet.h"
 
 1744341215 source:e:\zombie\zombie\src\characters\boss.cpp
@@ -234,15 +233,9 @@
 	"Menu.h"
 	<iostream>
 
-1744466991 e:\zombie\zombie\src\characters\explosion.h
-	<SDL.h>
-	<vector>
-	"Character.h"
+1744994282 e:\zombie\zombie\src\characters\explosion.h
 
-1744471666 source:e:\zombie\zombie\src\characters\explosion.cpp
-	"Explosion.h"
-	"Boss.h"
-	<cmath>
+1744994270 source:e:\zombie\zombie\src\characters\explosion.cpp
 
 1744490787 e:\zombie\zombie\src\characters\meteor.h
 

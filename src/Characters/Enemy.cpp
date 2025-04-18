@@ -11,9 +11,9 @@ Enemy::Enemy(Properties* props) : Character(props) {
     m_Health = 2;
     m_MaxHealth = 2;
 
-    m_DetectionRange = 300.0f; // Táº§m nháº£ Ä‘áº¡n
+    m_DetectionRange = 300.0f;
     m_FlyingSpeed = 120.0f;
-    m_FlyingRange = 400.0f; // Pháº¡m vi di chuyá»ƒn cá»‘ Ä‘á»‹nh
+    m_FlyingRange = 400.0f;
     m_OriginPoint = Vector2D(props->X, props->Y);
     m_MovingRight = true;
     m_IsAttacking = false;
@@ -27,62 +27,48 @@ Enemy::Enemy(Properties* props) : Character(props) {
 }
 
 void Enemy::Draw() {
-    // KhÃ´ng Ä‘iá»u chá»‰nh tá»a Ä‘á»™ theo camera ná»¯a, chá»‰ váº½ á»Ÿ tá»a Ä‘á»™ tháº¿ giá»›i
     if (!m_IsDead || m_DeathTime > 0) {
-        // Giáº£ sá»­ renderer sáº½ tá»± xá»­ lÃ½ chuyá»ƒn Ä‘á»•i sang tá»a Ä‘á»™ mÃ n hÃ¬nh náº¿u cáº§n
         m_Animation->Draw(m_Transform->X, m_Transform->Y, m_Width, m_Height, m_Flip);
         SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
-        // BÆ°á»›c 1: Láº¥y tá»a Ä‘á»™ camera tá»« GetPosition()
         Vector2D cameraPos = Camera::GetInstance()->GetPosition();
-        float cameraX = cameraPos.X;
-        float cameraY = cameraPos.Y;
-        // BÆ°á»›c 2: TÃ­nh tá»a Ä‘á»™ cá»§a boss trÃªn mÃ n hÃ¬nh (screen space)
-        int screenX = static_cast<int>(m_Transform->X - cameraX);
-        int screenY = static_cast<int>(m_Transform->Y - cameraY - 60);
-        // BÆ°á»›c 3: TÃ­nh vá»‹ trÃ­ thanh mÃ¡u dá»±a trÃªn tá»a Ä‘á»™ mÃ n hÃ¬nh cá»§a boss
-        int barWidth = 70;
-        int barHeight = 10;
-        int padding = -60;
 
-        int barX = screenX + (m_Width - barWidth) / 2; // CÄƒn giá»¯a thanh mÃ¡u theo chiá»u ngang cá»§a boss
-        int barY = screenY - barHeight - padding;      // Äáº·t thanh mÃ¡u ngay trÃªn Ä‘áº§u boss
+        // Tọa độ màn hình
+        int screenX = static_cast<int>(m_Transform->X - cameraPos.X);
+        int screenY = static_cast<int>(m_Transform->Y - cameraPos.Y);
 
-        float hpRatio = (float)m_Health / m_MaxHealth;
-        if (hpRatio < 0) hpRatio = 0;
-        if (hpRatio > 1) hpRatio = 1;
+        // Thanh máu
+        const int barWidth = 70;
+        const int barHeight = 10;
+        const int padding = 10; // Khoảng cách phía trên đầu enemy
 
-        // Váº½ ná»n cá»§a thanh mÃ¡u
+        int barX = screenX + (m_Width - barWidth) / 2; // Căn giữa
+        int barY = screenY - barHeight - padding; // Phía trên đầu
+
+        float hpRatio = std::max(0.0f, std::min(1.0f, static_cast<float>(m_Health) / m_MaxHealth));
+
         SDL_Rect background = {barX, barY, barWidth, barHeight};
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
         SDL_RenderFillRect(renderer, &background);
 
-        // Váº½ thanh mÃ¡u
         SDL_Rect healthBar = {barX, barY, static_cast<int>(barWidth * hpRatio), barHeight};
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &healthBar);
     }
 
-        // Váº½ Ä‘áº¡n á»Ÿ tá»a Ä‘á»™ tháº¿ giá»›i
-        for (auto bullet : m_Bullets) {
-            if (bullet->active) {
-                bullet->Draw();
-            }
+    for (auto bullet : m_Bullets) {
+        if (bullet->active) {
+            bullet->Draw();
         }
-
+    }
 }
 
 void Enemy::UpdateBullets(float dt) {
     for (auto it = m_Bullets.begin(); it != m_Bullets.end();) {
         if ((*it)->active) {
-            (*it)->Update(dt);
+            (*it)->Update(dt); // Cập nhật vị trí và collider
             Knight* player = Engine::GetInstance()->GetPlayer();
             if (player && CollisionHandler::GetInstance()->CheckCollision(
                 (*it)->collider->Get(), player->GetCollider()->Get())) {
-                // In thÃªm thÃ´ng tin Ä‘á»ƒ debug
-                std::cout << "Bullet position: (" << (*it)->position.X << ", " << (*it)->position.Y << "), "
-                          << "Bullet collider: (" << (*it)->collider->Get().x << ", " << (*it)->collider->Get().y << "), "
-                          << "Knight position: (" << player->GetOrigin()->X << ", " << player->GetOrigin()->Y << "), "
-                          << "Knight collider: (" << player->GetCollider()->Get().x << ", " << player->GetCollider()->Get().y << ")\n";
                 (*it)->active = false;
                 player->TakeDamage(1);
             }
@@ -95,7 +81,8 @@ void Enemy::UpdateBullets(float dt) {
 }
 
 void Enemy::Update(float dt) {
-    dt = Timer::GetInstance()->GetDeltaTime();
+    // Không ghi đè dt, sử dụng giá trị truyền vào
+    // dt = Timer::GetInstance()->GetDeltaTime();
 
     if (m_IsDead) {
         m_DeathTime -= dt;
@@ -105,53 +92,66 @@ void Enemy::Update(float dt) {
         return;
     }
 
+    // Cập nhật gốc (center) của enemy
     m_Origin->X = m_Transform->X + m_Width / 2;
     m_Origin->Y = m_Transform->Y + m_Height / 2;
 
     Knight* player = Engine::GetInstance()->GetPlayer();
     m_IsAttacking = false;
 
+    // Kiểm tra tấn công nếu player tồn tại
     if (player) {
         float distance = sqrt(pow(player->GetOrigin()->X - m_Origin->X, 2) +
                              pow(player->GetOrigin()->Y - m_Origin->Y, 2));
         m_IsAttacking = (distance < m_DetectionRange);
-
-        if (!m_IsAttacking) {
-            float distanceFromOrigin = abs(m_Transform->X - m_OriginPoint.X);
-            if (distanceFromOrigin >= m_FlyingRange) {
-                m_MovingRight = !m_MovingRight;
-            }
-            float speed = m_FlyingSpeed * dt;
-            m_Transform->X += m_MovingRight ? speed : -speed;
-            m_Flip = m_MovingRight ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-        } else {
-            if (player->GetOrigin()->X < m_Origin->X) {
-                m_Flip = SDL_FLIP_NONE;
-            } else {
-                m_Flip = SDL_FLIP_HORIZONTAL;
-            }
-            if (m_ShootCooldown <= 0) {
-                Shoot();
-                m_ShootCooldown = 1.0f;
-            }
-        }
-
-        m_Collider->Set(m_Transform->X, m_Transform->Y, 35, 45);
-        UpdateBullets(dt);
-        if (m_ShootCooldown > 0) m_ShootCooldown -= dt;
-
-        AnimationState();
-        m_Animation->Update();
     }
+
+    // Di chuyển qua lại nếu không tấn công
+    if (!m_IsAttacking) {
+        float distanceFromOrigin = abs(m_Transform->X - m_OriginPoint.X);
+        if (distanceFromOrigin >= m_FlyingRange) {
+            m_MovingRight = !m_MovingRight;
+        }
+        float speed = m_FlyingSpeed * dt;
+        m_Transform->X += m_MovingRight ? speed : -speed;
+        m_Flip = m_MovingRight ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+    } else if (player) {
+        // Chỉ cập nhật flip và bắn nếu player tồn tại
+        if (player->GetOrigin()->X < m_Origin->X) {
+            m_Flip = SDL_FLIP_NONE;
+        } else {
+            m_Flip = SDL_FLIP_HORIZONTAL;
+        }
+        if (m_ShootCooldown <= 0) {
+            Shoot();
+            m_ShootCooldown = 1.0f;
+        }
+    }
+
+    // Cập nhật collider và đạn
+    m_Collider->Set(m_Transform->X, m_Transform->Y, 35, 45);
+    UpdateBullets(dt);
+    if (m_ShootCooldown > 0) m_ShootCooldown -= dt;
+
+    AnimationState();
+    m_Animation->Update();
 }
 
 void Enemy::Shoot() {
     Knight* player = Engine::GetInstance()->GetPlayer();
     if (!player) return;
-    Vector2D direction(
-        player->GetOrigin()->X - m_Origin->X,
-        player->GetOrigin()->Y - m_Origin->Y
+
+    SDL_Rect knightCollider = player->GetCollider()->Get();
+    Vector2D knightCenter(
+        knightCollider.x + knightCollider.w / 2.0f,
+        knightCollider.y + knightCollider.h / 2.0f
     );
+
+    Vector2D direction(
+        knightCenter.X - m_Origin->X,
+        knightCenter.Y - m_Origin->Y
+    );
+
     float magnitude = sqrt(direction.X * direction.X + direction.Y * direction.Y);
     if (magnitude > 0) {
         direction.X /= magnitude;
@@ -165,17 +165,12 @@ void Enemy::Shoot() {
     float bulletStartY = m_Origin->Y;
 
     if (m_Flip == SDL_FLIP_NONE) {
-        bulletStartX -= m_Width / 2;
+        bulletStartX -= 10.0f;
     } else {
-        bulletStartX += m_Width / 2;
+        bulletStartX += 10.0f;
     }
 
-    Bullet* bullet = new Bullet(
-        bulletStartX,
-        bulletStartY,
-        bulletVelocity,
-        "bullet"
-    );
+    Bullet* bullet = new Bullet(bulletStartX, bulletStartY, bulletVelocity, "bullet");
     m_Bullets.push_back(bullet);
 }
 

@@ -68,7 +68,6 @@
 		<Unit filename="src/Characters/Character.h" />
 		<Unit filename="src/Characters/Enemy.cpp" />
 		<Unit filename="src/Characters/Enemy.h" />
-		<Unit filename="src/Characters/Explosion.cpp" />
 		<Unit filename="src/Characters/Explosion.h" />
 		<Unit filename="src/Characters/Knight.cpp" />
 		<Unit filename="src/Characters/Knight.h" />
