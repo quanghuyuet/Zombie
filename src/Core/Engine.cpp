@@ -9,7 +9,6 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "algorithm"
-#include <SDL_ttf.h>
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
     m_IsRuning = false;
@@ -19,46 +18,45 @@ Engine::Engine() {
     m_Player = nullptr;
     m_Boss = nullptr;
     m_InMenu = true;
-    // Khởi tạo cho skill vụ nổ
-
-    m_SkillCooldown = SKILL_COOLDOWN_DURATION;
-    m_SkillReady = false;
     bool m_IsGameOver = false;
-    m_GameOverTriggered = false;      // Khởi tạo biến mới
-    m_GameOverTriggerTime = 0;        // Khởi tạo thời điểm kích hoạt
-
+    m_GameOverTriggered = false;
+    m_GameOverTriggerTime = 0;
+    m_Music = nullptr;
+    m_ZombieDeathSound = nullptr;
+    m_BossDeathSound = nullptr;
 }
 
 bool Engine::Init() {
-    // --- SDL & Extensions ---
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+        SDL_Log("Không thể khởi tạo SDL: %s", SDL_GetError());
         return false;
     }
     if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) == 0) {
-        SDL_Log("Failed to initialize SDL_image: %s", IMG_GetError());
+        SDL_Log("Không thể khởi tạo SDL_image: %s", IMG_GetError());
         return false;
     }
     if (TTF_Init() == -1) {
-        cerr << "SDL_ttf could not initialize! TTF_Error: " << TTF_GetError() << endl;
+        std::cerr << "Không thể khởi tạo SDL_ttf! TTF_Error: " << TTF_GetError() << std::endl;
+        return false;
     }
-    // --- Window & Renderer ---
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "Không thể khởi tạo SDL_mixer! Mix_Error: " << Mix_GetError() << std::endl;
+        return false;
+    }
     m_Window = SDL_CreateWindow("Zombie", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     if (!m_Window) {
-        SDL_Log("Failed to create Window: %s", SDL_GetError());
+        SDL_Log("Không thể tạo cửa sổ: %s", SDL_GetError());
         return false;
     }
     m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!m_Renderer) {
-        SDL_Log("Failed to create Renderer: %s", SDL_GetError());
+        SDL_Log("Không thể tạo renderer: %s", SDL_GetError());
         return false;
     }
-    // --- Font ---
     gFont = TTF_OpenFont("text/The Bomb Sound.ttf", 25);
     if (!gFont) {
-        cerr << "Failed to load font! TTF_Error: " << TTF_GetError() << endl;
+        std::cerr << "Không thể tải font! TTF_Error: " << TTF_GetError() << std::endl;
     }
-    // --- Load Menu Textures ---
     auto texMgr = TextureManager::GetInstance();
     texMgr->Load("menu_background", "img/Menu/menugame.png");
     texMgr->Load("tutorial", "img/Menu/tutorial.png");
@@ -69,7 +67,6 @@ bool Engine::Init() {
         texMgr->GetTexture("tutorial"),
         texMgr->GetTexture("game_over")
     );
-    // --- Load Game Textures ---
     texMgr->Load("player_idle",     "img/Knight/Dung.png");
     texMgr->Load("player_run",      "img/Knight/Chay.png");
     texMgr->Load("player_jump",     "img/Knight/Jumpp.png");
@@ -86,60 +83,64 @@ bool Engine::Init() {
     texMgr->Load("boss_attack",     "img/Boss/Attack.png");
     texMgr->Load("boss_run",        "img/Boss/Run.png");
     texMgr->Load("background1",     "img/Background/background1.png");
-    texMgr->Load("explosion",       "img/Skill/explosion.png");
-    // --- Map, Collision ---
+
+    m_Music = Mix_LoadMUS("sound/nhac_chinh.wav");
+    if (!m_Music) {
+        std::cerr << "Không thể tải nhạc 'sound/nhac_chinh.wav'! Mix_Error: " << Mix_GetError() << std::endl;
+        std::cerr << "Vui lòng đảm bảo 'sound/nhac_chinh.wav' nằm đúng thư mục." << std::endl;
+    } else {
+        Mix_PlayMusic(m_Music, -1);
+    }
+
+    m_ZombieDeathSound = Mix_LoadWAV("sound/zombie_death.wav");
+    if (!m_ZombieDeathSound) {
+        std::cerr << "Không thể tải âm thanh 'sound/zombie_death.wav'! Mix_Error: " << Mix_GetError() << std::endl;
+        std::cerr << "Vui lòng đảm bảo 'sound/zombie_death.wav' nằm đúng thư mục." << std::endl;
+    }
+
+    m_BossDeathSound = Mix_LoadWAV("sound/boss_death.wav");
+    if (!m_BossDeathSound) {
+        std::cerr << "Không thể tải âm thanh 'sound/boss_death.wav'! Mix_Error: " << Mix_GetError() << std::endl;
+        std::cerr << "Vui lòng đảm bảo 'sound/boss_death.wav' nằm đúng thư mục." << std::endl;
+    }
+
     m_LevelMap = Map::GetInstance();
     m_LevelMap->Init(m_Renderer);
     CollisionHandler::GetInstance();
-    // --- Background setup ---
     m_Bg1Rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     m_Bg1Width = 1280;
-    // --- Create Player & Boss ---
     m_Player = new Knight(new Properties("player", 100, 200, 136, 96));
     m_Boss   = new Boss(new Properties("boss", 2600, 100, 400, 400));
-    // --- Add Enemies ---
     vector<Vector2D> enemyPositions = {
         {100, 200},{400,180},{800, 200}, {1200, 200}, {1600, 170},{2000, 140},{2600, 200}
-
     };
     for (auto& pos : enemyPositions)
         AddEnemy(new Enemy(new Properties("enemy", pos.X, pos.Y, 81, 71)));
-    // --- Add Zombies ---
     vector<Vector2D> zombiePositions = {
-       {260,200}, {500, 200}, {1000, 200}, {1200, 200},{700, 200},{1900, 200}, {2200, 250}
+      {260,200}, {500, 200}, {1000, 200}, {1200, 200},{700, 200},{1900, 200}, {2200, 250}
     };
     for (auto& pos : zombiePositions)
         AddZombie(new Zombie(new Properties("zombie", pos.X, pos.Y, 90, 90)));
-    // --- Final setup ---
     Camera::GetInstance()->SetTarget(m_Player->GetOrigin());
     m_MenuStartTime = SDL_GetTicks();
     return m_IsRuning = true;
 }
 
 void Engine::Update() {
-    if (m_InMenu || m_Menu->isGamePaused()) {
+    if (m_Menu->isGamePaused()) {
+        if (m_Music) Mix_PauseMusic();
         return;
     }
-    float dt = Timer::GetInstance()->GetDeltaTime();
-
-    // Cập nhật camera trước tất cả
-    Camera::GetInstance()->Update(dt);
-
-    // Cập nhật skill cooldown
-    if (!m_SkillReady) {
-        m_SkillCooldown -= dt;
-        if (m_SkillCooldown <= 0) {
-            m_SkillReady = true;
-            m_SkillCooldown = SKILL_COOLDOWN_DURATION;
-        }
+    if (!m_IsGameOver && m_Music && Mix_PausedMusic()) {
+        Mix_ResumeMusic();
     }
-
+    float dt = Timer::GetInstance()->GetDeltaTime();
+    Camera::GetInstance()->Update(dt);
     m_Player->Update(dt);
     m_Boss->Update(dt);
-
     for (auto enemy : m_Enemies) {
         if (enemy != nullptr) {
-            enemy->Update(dt); // Chỉ cập nhật, không vẽ
+            enemy->Update(dt);
         }
     }
 
@@ -149,11 +150,11 @@ void Engine::Update() {
         }
     }
 
-    // Kiểm tra game over
     if (!m_GameOverTriggered) {
         if (m_Player->GetHealth() <= 0 || m_Boss->IsDead()) {
             m_GameOverTriggered = true;
             m_GameOverTriggerTime = SDL_GetTicks();
+            if (m_Music) Mix_PauseMusic();
         }
     } else {
         if (SDL_GetTicks() - m_GameOverTriggerTime >= 3000) {
@@ -161,9 +162,6 @@ void Engine::Update() {
         }
     }
 
-
-
-    // Xóa Enemy và tăng điểm
     m_Enemies.erase(
         remove_if(m_Enemies.begin(), m_Enemies.end(),
             [this](Enemy* enemy) {
@@ -177,7 +175,6 @@ void Engine::Update() {
         m_Enemies.end()
     );
 
-    // Xóa Zombie và tăng điểm
     m_Zombies.erase(
         remove_if(m_Zombies.begin(), m_Zombies.end(),
             [this](Zombie* zombie) {
@@ -214,12 +211,12 @@ void Engine::Render() {
         m_Player->Draw();
         m_Boss->Draw();
         for (auto enemy : m_Enemies) {
-            if (enemy != nullptr) { // Thêm kiểm tra null
+            if (enemy != nullptr) {
                 enemy->Draw();
             }
         }
         for (auto zombie : m_Zombies) {
-            if (zombie != nullptr) { // Thêm kiểm tra null
+            if (zombie != nullptr) {
                 zombie->Draw();
             }
         }
@@ -237,7 +234,10 @@ void Engine::Events() {
         if (m_InMenu) {
             if (t - m_MenuStartTime < 1200) continue;
             m_Menu->handleEvents(event, m_IsRuning);
-            if (m_Menu->shouldStart()) m_InMenu = false, m_Menu->setInGame(true);
+            if (m_Menu->shouldStart()) {
+                m_InMenu = false;
+                m_Menu->setInGame(true);
+            }
             if (m_Menu->shouldQuit()) m_IsRuning = false;
         }
         else if (m_IsGameOver) {
@@ -271,12 +271,6 @@ void Engine::Events() {
             if (!m_Menu->isGamePaused()) {
                 Input::GetInstance()->Listen();
                 if (event.type == SDL_QUIT) m_IsRuning = false;
-                if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && m_SkillReady) {
-                    int x, y; SDL_GetMouseState(&x, &y);
-                    Vector2D cam = Camera::GetInstance()->GetPosition();
-
-                    m_SkillReady = false; m_SkillCooldown = SKILL_COOLDOWN_DURATION;
-                }
             }
         }
     }
@@ -308,13 +302,25 @@ bool Engine::Clean() {
     TextureManager::GetInstance()->Clean();
     delete m_Menu;
 
-
+    if (m_Music) {
+        Mix_FreeMusic(m_Music);
+        m_Music = nullptr;
+    }
+    if (m_ZombieDeathSound) {
+        Mix_FreeChunk(m_ZombieDeathSound);
+        m_ZombieDeathSound = nullptr;
+    }
+    if (m_BossDeathSound) {
+        Mix_FreeChunk(m_BossDeathSound);
+        m_BossDeathSound = nullptr;
+    }
     if (gFont != nullptr) {
         TTF_CloseFont(gFont);
         gFont = nullptr;
     }
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
+    Mix_CloseAudio();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

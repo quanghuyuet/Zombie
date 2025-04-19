@@ -41,6 +41,11 @@ void Zombie::TakeDamage(int damage) {
             m_RigidBody->SetVelocityX(0);
             m_RigidBody->SetVelocityY(0);
             AnimationState();
+            // Play zombie death sound
+            Mix_Chunk* deathSound = Engine::GetInstance()->GetZombieDeathSound();
+            if (deathSound) {
+                Mix_PlayChannel(-1, deathSound, 0);
+            }
         }
     }
 }
@@ -150,42 +155,33 @@ void Zombie::Update(float dt) {
 }
 
 void Zombie::Draw() {
-        // Không điều chỉnh tọa độ theo camera nữa, chỉ vẽ ở tọa độ thế giới
     if (!m_IsDead || m_DeathTime > 0) {
-        // Giả sử renderer sẽ tự xử lý chuyển đổi sang tọa độ màn hình nếu cần
         m_Animation->Draw(m_Transform->X, m_Transform->Y, m_Width, m_Height, m_Flip);
         SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
-        // Bước 1: Lấy tọa độ camera từ GetPosition()
         Vector2D cameraPos = Camera::GetInstance()->GetPosition();
         float cameraX = cameraPos.X;
         float cameraY = cameraPos.Y;
-        // Bước 2: Tính tọa độ của boss trên màn hình (screen space)
         int screenX = static_cast<int>(m_Transform->X - cameraX);
         int screenY = static_cast<int>(m_Transform->Y - cameraY - 60);
-        // Bước 3: Tính vị trí thanh máu dựa trên tọa độ màn hình của boss
         int barWidth = 70;
         int barHeight = 8;
         int padding = -70;
 
-        int barX = screenX + (m_Width - barWidth) / 2; // Căn giữa thanh máu theo chiều ngang của boss
-        int barY = screenY - barHeight - padding;      // Đặt thanh máu ngay trên đầu boss
+        int barX = screenX + (m_Width - barWidth) / 2;
+        int barY = screenY - barHeight - padding;
 
         float hpRatio = (float)m_Health / m_MaxHealth;
         if (hpRatio < 0) hpRatio = 0;
         if (hpRatio > 1) hpRatio = 1;
 
-        // Vẽ nền của thanh máu
         SDL_Rect background = {barX, barY, barWidth, barHeight};
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
         SDL_RenderFillRect(renderer, &background);
 
-        // Vẽ thanh máu
         SDL_Rect healthBar = {barX, barY, static_cast<int>(barWidth * hpRatio), barHeight};
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &healthBar);
     }
-
-
 }
 
 void Zombie::Attack(Knight* player) {

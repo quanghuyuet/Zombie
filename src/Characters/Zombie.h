@@ -10,33 +10,33 @@ using namespace std;
 
 class Zombie : public Character {
 public:
-    Zombie(Properties* props);
-    virtual void Draw();
-    virtual void Update(float dt);
-    virtual void Clean() {}
-    virtual void TakeDamage(int damage);
-    Collider* GetCollider() { return m_Collider; }
-    virtual float GetDeathTime() { return m_DeathTime; }
-    virtual bool IsDead() { return m_IsDead; }
+    Zombie(Properties* props); // Hàm khởi tạo
+    virtual void Draw(); // Vẽ zombie
+    virtual void Update(float dt); // Cập nhật trạng thái
+    virtual void Clean() {} // Dọn dẹp (hiện tại không dùng)
+    virtual void TakeDamage(int damage); // Nhận sát thương
+    Collider* GetCollider() { return m_Collider; } // Lấy collider
+    virtual float GetDeathTime() { return m_DeathTime; } // Lấy thời gian chết
+    virtual bool IsDead() { return m_IsDead; } // Kiểm tra zombie đã chết
 
 private:
-    void AnimationState();
-    void Attack(Knight* player);
-    RigidBody* m_RigidBody;
-    Collider* m_Collider;
-    Animation* m_Animation;
-    float m_WalkingSpeed;
-    float m_WalkingRange;
-    float m_DetectionRange;
-    float m_AttackCooldown;
-    bool m_IsDead;
-    float m_DeathTime;
-    int m_Health;
-    int m_MaxHealth;
-    bool m_MovingRight;
-    bool m_IsAttacking;
-    bool m_IsGrounded;
-    Vector2D m_OriginPoint;
-    Vector2D m_LastSafePosition;
-    float m_AttackRange;
+    void AnimationState(); // Cập nhật trạng thái animation
+    void Attack(Knight* player); // Tấn công người chơi
+    RigidBody* m_RigidBody; // Vật lý
+    Collider* m_Collider; // Collider cho va chạm
+    Animation* m_Animation; // Animation
+    float m_WalkingSpeed; // Tốc độ di chuyển
+    float m_WalkingRange; // Phạm vi di chuyển (không sử dụng trong code hiện tại)
+    float m_DetectionRange; // Phạm vi phát hiện người chơi
+    float m_AttackCooldown; // Thời gian hồi chiêu tấn công
+    bool m_IsDead; // Trạng thái chết
+    float m_DeathTime; // Thời gian chờ trước khi xóa zombie
+    int m_Health; // Máu hiện tại
+    int m_MaxHealth; // Máu tối đa
+    bool m_MovingRight; // Hướng di chuyển
+    bool m_IsAttacking; // Đang tấn công
+    bool m_IsGrounded; // Đang trên mặt đất
+    Vector2D m_OriginPoint; // Điểm gốc (tâm) của zombie
+    Vector2D m_LastSafePosition; // Vị trí an toàn trước đó
+    float m_AttackRange; // Phạm vi tấn công
 };

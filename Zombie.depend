@@ -18,10 +18,11 @@
 	"Engine.h"
 	"Timer.h"
 
-1744997828 e:\zombie\zombie\src\core\engine.h
+1745074224 e:\zombie\zombie\src\core\engine.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 	"Enemy.h"
 	"Knight.h"
 	<iostream>
@@ -45,7 +46,7 @@
 	"Timer.h"
 	"CollisionHandler.h"
 
-1744529827 e:\zombie\zombie\src\characters\knight.h
+1745072541 e:\zombie\zombie\src\characters\knight.h
 	<iostream>
 	"Character.h"
 	"GameObject.h"
@@ -55,6 +56,7 @@
 	"Collider.h"
 	"Point.h"
 	"Transform.h"
+	<SDL_mixer.h>
 
 1744465874 e:\zombie\zombie\src\characters\character.h
 	<string>
@@ -114,7 +116,7 @@
 1744341215 e:\zombie\zombie\src\timer\timer.h
 	<SDL.h>
 
-1744340666 e:\zombie\zombie\src\characters\zombie.h
+1745073826 e:\zombie\zombie\src\characters\zombie.h
 	"Character.h"
 	"RigidBody.h"
 	"Collider.h"
@@ -129,7 +131,7 @@
 1744997552 source:e:\zombie\zombie\src\characters\enemy.cpp
 	"Enemy.h"
 
-1744997821 source:e:\zombie\zombie\src\characters\knight.cpp
+1745072964 source:e:\zombie\zombie\src\characters\knight.cpp
 	"Knight.h"
 	<iostream>
 	"GameObject.h"
@@ -153,7 +155,7 @@
 	"Engine.h"
 	"Camera.h"
 
-1744642257 source:e:\zombie\zombie\src\characters\zombie.cpp
+1745073818 source:e:\zombie\zombie\src\characters\zombie.cpp
 	"Zombie.h"
 	"Engine.h"
 	"CollisionHandler.h"
@@ -171,7 +173,7 @@
 	<SDL_image.h>
 	<SDL.h>
 
-1744997368 source:e:\zombie\zombie\src\core\engine.cpp
+1745074195 source:e:\zombie\zombie\src\core\engine.cpp
 	"Engine.h"
 	"TextureManager.h"
 	"Character.h"
@@ -183,7 +185,6 @@
 	"Camera.h"
 	"GameObject.h"
 	"algorithm"
-	<SDL_ttf.h>
 
 1743692173 source:e:\zombie\zombie\src\timer\timer.cpp
 	"Timer.h"
@@ -204,14 +205,14 @@
 1744994158 source:e:\zombie\zombie\src\characters\bullet.cpp
 	"Bullet.h"
 
-1744341215 source:e:\zombie\zombie\src\characters\boss.cpp
+1745074195 source:e:\zombie\zombie\src\characters\boss.cpp
 	"Boss.h"
 	"Engine.h"
 	"CollisionHandler.h"
 	"Timer.h"
 	"Camera.h"
 
-1744279703 e:\zombie\zombie\src\characters\boss.h
+1745074195 e:\zombie\zombie\src\characters\boss.h
 	"Character.h"
 	"RigidBody.h"
 	"Collider.h"
