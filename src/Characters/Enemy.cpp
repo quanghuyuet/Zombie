@@ -4,22 +4,17 @@ Enemy::Enemy(Properties* props) : Character(props) {
     m_Collider = new Collider();
     m_Animation = new Animation();
     m_Animation->SetProps(m_TextureID, 1, 4, 100);
-
     m_ShootCooldown = 0;
     m_IsDead = false;
     m_DeathTime = 0;
-    m_Health = 2;
-    m_MaxHealth = 2;
-
+    m_Health = 3;
+    m_MaxHealth = 3;
     m_DetectionRange = 300.0f;
     m_FlyingSpeed = 120.0f;
     m_FlyingRange = 400.0f;
     m_OriginPoint = Vector2D(props->X, props->Y);
     m_MovingRight = true;
     m_IsAttacking = false;
-
-    TextureManager::GetInstance()->Load("bullet", "img/Enemy/bullet.png");
-
     m_Transform->X = props->X;
     m_Transform->Y = props->Y;
     m_Collider->Set(m_Transform->X, m_Transform->Y, 35, 45);
@@ -43,13 +38,10 @@ void Enemy::Draw() {
 
         int barX = screenX + (m_Width - barWidth) / 2; // Căn giữa
         int barY = screenY - barHeight - padding; // Phía trên đầu
-
-        float hpRatio = std::max(0.0f, std::min(1.0f, static_cast<float>(m_Health) / m_MaxHealth));
-
+        float hpRatio = max(0.0f, min(1.0f, static_cast<float>(m_Health) / m_MaxHealth));
         SDL_Rect background = {barX, barY, barWidth, barHeight};
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
         SDL_RenderFillRect(renderer, &background);
-
         SDL_Rect healthBar = {barX, barY, static_cast<int>(barWidth * hpRatio), barHeight};
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &healthBar);
@@ -105,7 +97,6 @@ void Enemy::Update(float dt) {
                              pow(player->GetOrigin()->Y - m_Origin->Y, 2));
         m_IsAttacking = (distance < m_DetectionRange);
     }
-
     // Di chuyển qua lại nếu không tấn công
     if (!m_IsAttacking) {
         float distanceFromOrigin = abs(m_Transform->X - m_OriginPoint.X);

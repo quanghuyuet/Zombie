@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "algorithm"
+
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
     m_IsRuning = false;
@@ -112,7 +113,7 @@ bool Engine::Init() {
     m_Player = new Knight(new Properties("player", 100, 200, 136, 96));
     m_Boss   = new Boss(new Properties("boss", 2600, 100, 400, 400));
     vector<Vector2D> enemyPositions = {
-        {100, 200},{400,180},{800, 200}, {1200, 200}, {1600, 170},{2000, 140},{2600, 200}
+        {100, 200},{400,140},{800, 200}, {1200, 160}, {1600, 170},{2000, 140},{2600, 200}
     };
     for (auto& pos : enemyPositions)
         AddEnemy(new Enemy(new Properties("enemy", pos.X, pos.Y, 81, 71)));

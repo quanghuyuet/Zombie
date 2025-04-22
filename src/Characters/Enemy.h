@@ -13,9 +13,8 @@
 #include "TextureManager.h"
 #include "Timer.h"
 #include "CollisionHandler.h"
-
-// Định nghĩa hằng số nếu cần
-#define DEAD_TIME 1.0f // Thời gian hiển thị animation chết
+#define DEAD_TIME 1.0f
+using namespace std;
 class Bullet;
 class Enemy : public Character {
 public:
@@ -38,18 +37,18 @@ private:
     void AnimationState();
 
 private:
-    Collider* m_Collider;
-    Animation* m_Animation;
-    std::vector<Bullet*> m_Bullets;
-    float m_ShootCooldown;
-    bool m_IsDead;
-    float m_DeathTime;
-    int m_Health;
-    int m_MaxHealth;
-    float m_DetectionRange; // Tầm phát hiện knight
-    float m_FlyingSpeed; // Tốc độ di chuyển của enemy
-    float m_FlyingRange; // Phạm vi di chuyển cố định
-    Vector2D m_OriginPoint; // Điểm gốc ban đầu của enemy
-    bool m_MovingRight; // Hướng di chuyển (phải/trái)
+    Collider* m_Collider; // Đối tượng quản lý va chạm
+    Animation* m_Animation; // Đối tượng quản lý animation
+    std::vector<Bullet*> m_Bullets; // Danh sách các viên đạn kẻ thù bắn ra
+    float m_ShootCooldown; // Thời gian chờ giữa các lần bắn
+    bool m_IsDead; // Trạng thái chết/sống
+    float m_DeathTime; // Thời gian còn lại để hiển thị animation chết
+    int m_Health; // Máu hiện tại
+    int m_MaxHealth; // Máu tối đa
+    float m_DetectionRange; // Tầm phát hiện người chơi
+    float m_FlyingSpeed; // Tốc độ di chuyển
+    float m_FlyingRange; // Phạm vi di chuyển qua lại
+    Vector2D m_OriginPoint; // Điểm gốc ban đầu của kẻ thù
+    bool m_MovingRight; // Hướng di chuyển (true = phải, false = trái)
     bool m_IsAttacking; // Đang tấn công hay không
 };

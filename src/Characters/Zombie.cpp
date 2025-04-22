@@ -12,12 +12,12 @@ Zombie::Zombie(Properties* props) : Character(props) {
 
     m_Animation = new Animation();
 
-    m_WalkingSpeed = 10.0f;
+    m_WalkingSpeed = 50.0f;
     m_DetectionRange = 150.0f;
     m_AttackRange = 40.0f;
     m_AttackCooldown = 1.5f;
-    m_Health = 2;
-    m_MaxHealth = 2;
+    m_Health = 5;
+    m_MaxHealth = 5;
     m_IsDead = false;
     m_DeathTime = 0.0f;
     m_MovingRight = true;

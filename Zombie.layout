@@ -2,73 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="src\Animation\Animation.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Characters\Boss.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="73" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-			<Collapse line="8" />
-			<Collapse line="14" />
-		</Folding>
-	</File>
-	<File name="src\Menu\Menu.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2146" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Zombie.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1890" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Bullet.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1948" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="3" />
-			<Collapse line="17" />
-			<Collapse line="26" />
-			<Collapse line="36" />
-		</Folding>
-	</File>
-	<File name="src\Physics\Point.h" open="0" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="57" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Map\Map.h" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="252" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Collision\CollisionHandler.h" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="311" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Camera\Camera.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Inputs\Input.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="710" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="5" />
-			<Collapse line="10" />
-			<Collapse line="24" />
-			<Collapse line="31" />
-			<Collapse line="37" />
-			<Collapse line="43" />
-		</Folding>
-	</File>
-	<File name="src\Characters\Explosion.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="1781" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Physics\Transform.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -76,63 +12,9 @@
 			<Cursor1 position="65" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Timer\Timer.h" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="129" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Core\Engine.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="238" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="12" />
-			<Collapse line="28" />
-			<Collapse line="128" />
-			<Collapse line="193" />
-			<Collapse line="229" />
-			<Collapse line="278" />
-			<Collapse line="329" />
-		</Folding>
-	</File>
-	<File name="src\Characters\Enemy.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5707" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="2" />
-			<Collapse line="28" />
-			<Collapse line="64" />
-			<Collapse line="82" />
-			<Collapse line="139" />
-			<Collapse line="176" />
-			<Collapse line="186" />
-			<Collapse line="196" />
-		</Folding>
-	</File>
 	<File name="src\Object\GameObject.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="src\Menu\Menu.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6420" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-			<Collapse line="69" />
-			<Collapse line="75" />
-			<Collapse line="82" />
-			<Collapse line="94" />
-			<Collapse line="99" />
-			<Collapse line="155" />
-			<Collapse line="160" />
-		</Folding>
-	</File>
-	<File name="src\Characters\Bullet.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="482" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Graphics\TextureManager.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -140,110 +22,31 @@
 			<Cursor1 position="720" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Camera\Camera.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Camera\Camera.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Collision\CollisionHandler.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Characters\Bullet.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="576" topLine="0" />
+			<Cursor1 position="2085" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="4" />
-			<Collapse line="9" />
-			<Collapse line="14" />
-			<Collapse line="21" />
-			<Collapse line="46" />
-		</Folding>
-	</File>
-	<File name="src\Timer\Timer.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="428" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-			<Collapse line="9" />
-			<Collapse line="14" />
-			<Collapse line="21" />
-		</Folding>
-	</File>
-	<File name="src\Characters\Zombie.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7229" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="6" />
-			<Collapse line="34" />
-			<Collapse line="52" />
-			<Collapse line="156" />
-			<Collapse line="186" />
-			<Collapse line="196" />
-		</Folding>
-	</File>
-	<File name="src\Physics\RigidBody.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="349" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Physics\Collider.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Enemy.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="436" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Boss.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5953" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="6" />
-			<Collapse line="34" />
-			<Collapse line="52" />
-			<Collapse line="132" />
-			<Collapse line="161" />
-			<Collapse line="171" />
-		</Folding>
-	</File>
-	<File name="src\Characters\Knight.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1588" topLine="5" />
-		</Cursor>
-		<Folding>
-			<Collapse line="18" />
+			<Collapse line="3" />
+			<Collapse line="32" />
+			<Collapse line="47" />
 			<Collapse line="57" />
 			<Collapse line="68" />
-			<Collapse line="123" />
-			<Collapse line="249" />
-			<Collapse line="258" />
 		</Folding>
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Characters\Knight.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="3746" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="src\Graphics\TextureManager.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Core\Engine.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="25" />
-			<Collapse line="38" />
-			<Collapse line="47" />
-			<Collapse line="55" />
-			<Collapse line="56" />
-			<Collapse line="62" />
-		</Folding>
-	</File>
-	<File name="src\Animation\Animation.h" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="361" topLine="0" />
+			<Cursor1 position="3044" topLine="37" />
 		</Cursor>
 	</File>
 	<File name="src\Physics\Vector2D.h" open="0" top="0" tabpos="29" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -251,19 +54,9 @@
 			<Cursor1 position="38" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Core\Engine.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Characters\Explosion.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3044" topLine="55" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Character.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="388" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Characters\Knight.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1839" topLine="34" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Map\Map.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -281,9 +74,197 @@
 			<Collapse line="108" />
 		</Folding>
 	</File>
-	<File name="src\Characters\Boss.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Animation\Animation.h" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1781" topLine="0" />
+			<Cursor1 position="361" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Physics\Collider.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Animation\Animation.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="73" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="8" />
+			<Collapse line="14" />
+		</Folding>
+	</File>
+	<File name="src\Characters\Bullet.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="482" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Characters\Knight.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11854" topLine="8" />
+		</Cursor>
+		<Folding>
+			<Collapse line="19" />
+			<Collapse line="66" />
+			<Collapse line="78" />
+			<Collapse line="274" />
+			<Collapse line="295" />
+		</Folding>
+	</File>
+	<File name="src\Core\Engine.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4900" topLine="43" />
+		</Cursor>
+		<Folding>
+			<Collapse line="13" />
+			<Collapse line="129" />
+			<Collapse line="194" />
+			<Collapse line="230" />
+			<Collapse line="279" />
+			<Collapse line="330" />
+		</Folding>
+	</File>
+	<File name="src\Map\Map.h" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="252" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Characters\Zombie.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="496" topLine="9" />
+		</Cursor>
+		<Folding>
+			<Collapse line="34" />
+			<Collapse line="52" />
+			<Collapse line="156" />
+			<Collapse line="186" />
+			<Collapse line="196" />
+		</Folding>
+	</File>
+	<File name="src\Physics\Point.h" open="0" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="57" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Characters\Enemy.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="353" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Collision\CollisionHandler.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1254" topLine="31" />
+		</Cursor>
+	</File>
+	<File name="src\Camera\Camera.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Timer\Timer.h" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="129" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Collision\CollisionHandler.h" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="902" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Graphics\TextureManager.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="25" />
+			<Collapse line="38" />
+			<Collapse line="47" />
+			<Collapse line="55" />
+			<Collapse line="56" />
+			<Collapse line="62" />
+		</Folding>
+	</File>
+	<File name="src\Timer\Timer.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="428" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="9" />
+			<Collapse line="14" />
+			<Collapse line="21" />
+		</Folding>
+	</File>
+	<File name="src\Characters\Zombie.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1890" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Menu\Menu.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2146" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="src\Characters\Character.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="388" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Physics\RigidBody.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="888" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="src\Characters\Boss.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5953" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="6" />
+			<Collapse line="34" />
+			<Collapse line="52" />
+			<Collapse line="132" />
+			<Collapse line="161" />
+			<Collapse line="171" />
+		</Folding>
+	</File>
+	<File name="src\Characters\Enemy.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3519" topLine="173" />
+		</Cursor>
+	</File>
+	<File name="src\Menu\Menu.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6420" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="69" />
+			<Collapse line="75" />
+			<Collapse line="82" />
+			<Collapse line="94" />
+			<Collapse line="99" />
+			<Collapse line="155" />
+			<Collapse line="160" />
+		</Folding>
+	</File>
+	<File name="src\Inputs\Input.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="710" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="5" />
+			<Collapse line="10" />
+			<Collapse line="24" />
+			<Collapse line="31" />
+			<Collapse line="37" />
+			<Collapse line="43" />
+		</Folding>
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
