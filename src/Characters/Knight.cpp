@@ -1,9 +1,10 @@
-#include "Knight.h"
-#include <iostream>
-#include "GameObject.h"
-#include "Character.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <iostream>
+#include "Knight.h"
+#include "GameObject.h"
+#include "Character.h"
 #include "TextureManager.h"
 #include "Animation.h"
 #include "RigidBody.h"
@@ -14,8 +15,6 @@
 #include "Enemy.h"
 #include "Zombie.h"
 #include "Engine.h"
-#include <SDL_ttf.h>
-
 // Hàm khởi tạo hiệp sĩ với các thuộc tính ban đầu
 Knight::Knight(Properties* props) : Character(props) {
     // Thiết lập thời gian và lực nhảy từ hằng số
@@ -45,8 +44,8 @@ Knight::Knight(Properties* props) : Character(props) {
     m_Origin = new Point();
 
     // Thiết lập máu và mana
-    m_Health = 70;        // Máu hiện tại
-    m_MaxHealth = 70;     // Máu tối đa
+    m_Health = 100;        // Máu hiện tại
+    m_MaxHealth = 100;     // Máu tối đa
     m_Mana = 5;           // Mana hiện tại
     m_MaxMana = 5;        // Mana tối đa
     m_ManaRegenTime = 0.0f; // Thời gian chờ hồi mana ban đầu
@@ -63,7 +62,6 @@ Knight::Knight(Properties* props) : Character(props) {
     if (m_JumpSound) Mix_VolumeChunk(m_JumpSound, 100);  // Âm lượng nhảy: 100/128 (~78%)
 }
 
-// Hàm giảm máu và mana khi hiệp sĩ nhận sát thương
 void Knight::TakeDamage(int damage) {
     m_Health -= damage; // Giảm máu theo lượng sát thương
     if (m_Health <= 0) {
@@ -75,7 +73,6 @@ void Knight::TakeDamage(int damage) {
     }
 }
 
-// Hàm vẽ hiệp sĩ và thanh máu/mana lên màn hình
 void Knight::Draw() {
     // Vẽ sprite hiệp sĩ tại vị trí hiện tại với hướng và kích thước
     m_Animation->Draw(m_Transform->X, m_Transform->Y, m_Width, m_Height, m_Flip);
@@ -130,7 +127,6 @@ void Knight::Draw() {
     SDL_RenderFillRect(renderer, &mpBar);
 }
 
-// Hàm cập nhật trạng thái hiệp sĩ mỗi khung hình
 void Knight::Update(float dt) {
     // Lấy thời gian delta từ Timer
     dt = Timer::GetInstance()->GetDeltaTime();
@@ -263,15 +259,14 @@ void Knight::Update(float dt) {
     }
 
     // Cập nhật điểm trung tâm
-    m_Origin->X = m_Transform->X + m_Width / 2; // Tọa độ X trung tâm
-    m_Origin->Y = m_Transform->Y + m_Height / 2; // Tọa độ Y trung tâm
+    m_Origin->X = m_Transform->X + m_Width / 2;
+    m_Origin->Y = m_Transform->Y + m_Height / 2;
 
     // Cập nhật hoạt hình
-    AnimationState(); // Chọn hoạt hình phù hợp
-    m_Animation->Update(); // Cập nhật frame hoạt hình
+    AnimationState();
+    m_Animation->Update();
 }
 
-// Hàm chọn hoạt hình dựa trên trạng thái
 void Knight::AnimationState() {
     // Mặc định là hoạt hình đứng yên
     m_Animation->SetProps("player_idle", 0, 6, 100); // 6 frame, 100ms
@@ -292,7 +287,6 @@ void Knight::AnimationState() {
     }
 }
 
-// Hàm giải phóng tài nguyên
 void Knight::Clean() {
     TextureManager::GetInstance()->Drop(m_TextureID); // Xóa texture
     delete m_Collider; // Xóa thành phần va chạm

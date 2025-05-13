@@ -3,21 +3,14 @@
 // Khởi tạo con trỏ tĩnh s_Instance thành nullptr (chưa có instance)
 CollisionHandler* CollisionHandler::s_Instance = nullptr;
 
-// Hàm khởi tạo CollisionHandler
 CollisionHandler::CollisionHandler() {
-    // Lấy tilemap va chạm từ lớp Map (bản đồ)
     m_CollisionTilemap = Map::GetInstance()->GetTileMap();
-    // Tilemap là mảng 2D, mỗi ô có giá trị:
-    // > 0: Ô rắn (tường, nền đất)
-    // 0: Ô rỗng (không khí)
 }
 
-// Hàm hủy để giải phóng tài nguyên
 CollisionHandler::~CollisionHandler() {
-    delete s_Instance; // Xóa instance duy nhất
-    s_Instance = nullptr; // Đặt lại con trỏ về null
+    delete s_Instance;
+    s_Instance = nullptr;
 }
-
 // Hàm lấy instance duy nhất của CollisionHandler (singleton)
 CollisionHandler* CollisionHandler::GetInstance() {
     if (s_Instance == nullptr) { // Nếu chưa có instance
@@ -26,7 +19,6 @@ CollisionHandler* CollisionHandler::GetInstance() {
     return s_Instance; // Trả về instance
 }
 
-// Hàm kiểm tra va chạm giữa một hình chữ nhật và bản đồ
 bool CollisionHandler::MapCollision(SDL_Rect a) {
     int tileSize = TILE_SIZE; // Kích thước mỗi ô (tile) trên bản đồ
     int RowCount = m_CollisionTilemap.size(); // Số hàng của tilemap
@@ -55,7 +47,7 @@ bool CollisionHandler::MapCollision(SDL_Rect a) {
     return false; // Không có va chạm
 }
 
-// Hàm kiểm tra va chạm giữa hai hình chữ nhật
+
 bool CollisionHandler::CheckCollision(SDL_Rect a, SDL_Rect b) {
     // Kiểm tra xem hai hình chữ nhật có giao nhau không
     return (a.x < b.x + b.w && // Bên trái của a nhỏ hơn bên phải của b

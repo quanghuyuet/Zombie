@@ -19,12 +19,29 @@ public:
 
 private:
     Map();
+    // Constructor riêng, chỉ gọi từ GetInstance() để đảm bảo Singleton.
+
     ~Map();
+    // Destructor để giải phóng tài nguyên khi đối tượng bị hủy.
+
     int m_Width;
+    // Biến lưu chiều rộng của bản đồ (số ô theo chiều ngang).
+
     int m_Height;
+    // Biến lưu chiều cao của bản đồ (số ô theo chiều dọc).
+
     int m_TileSize;
+    // Biến lưu kích thước của mỗi ô (pixel).
+
     vector<vector<int>> m_TileMap;
+    // Mảng 2 chiều lưu ID của các ô trên bản đồ.
+
     SDL_Renderer* m_Renderer;
+    // Con trỏ tới renderer của SDL, dùng để vẽ đồ họa.
+
     SDL_Texture* m_TilesetTexture;
+    // Texture chứa hình ảnh tileset (tập hợp các ô).
+
     static Map* s_Instance;
+    // Biến tĩnh lưu instance duy nhất của lớp Map (Singleton).
 };

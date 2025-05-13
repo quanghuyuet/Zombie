@@ -156,6 +156,18 @@ void Boss::Draw() {
         SDL_Rect healthBar = {barX, barY, static_cast<int>(barWidth * hpRatio), barHeight};
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &healthBar);
+        /*
+        // Vẽ hộp bao quanh (collider) của boss để debug
+        SDL_Rect colliderBox = m_Collider->Get(); // Lấy hộp bao quanh từ collider
+        SDL_Rect screenBox = {
+            static_cast<int>(colliderBox.x - cameraX),
+            static_cast<int>(colliderBox.y - cameraY),
+            colliderBox.w,
+            colliderBox.h
+        };
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Màu xanh lá
+        SDL_RenderDrawRect(renderer, &screenBox); // Vẽ đường viền hộp
+        */
     }
 }
 

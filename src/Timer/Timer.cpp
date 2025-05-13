@@ -3,7 +3,7 @@
 Timer* Timer::s_Instance = nullptr;
 
 Timer::Timer() {
-    m_LastTime = SDL_GetTicks(); // Khá»Ÿi táº¡o thá»i gian ban Ä‘áº§u
+    m_LastTime = SDL_GetTicks();
     m_DeltaTime = 0.0f;
 }
 
@@ -21,7 +21,7 @@ Timer* Timer::GetInstance() {
 
 void Timer::Tick() {
     Uint32 currentTime = SDL_GetTicks();
-    m_DeltaTime = (currentTime - m_LastTime) / 1000.0f; // Äá»•i sang giĂ¢y
+    m_DeltaTime = (currentTime - m_LastTime) / 1000.0f;
 
     if (m_DeltaTime > TARGET_DELTATIME)
         m_DeltaTime = TARGET_DELTATIME;

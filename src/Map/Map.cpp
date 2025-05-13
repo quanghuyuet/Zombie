@@ -5,10 +5,9 @@
 #include <SDL.h>
 
 Map* Map::s_Instance = nullptr;
+
 Map::Map() : m_Renderer(nullptr), m_TilesetTexture(nullptr) {
-    m_TileSize = TILE_SIZE; // Lấy từ Camera.h
-
-
+    m_TileSize = TILE_SIZE;
     std::ifstream file("img/Map/Map_Dark.txt");
     if (!file.is_open()) {
         cout << "Khong mo duoc file map.txt!" << endl;
@@ -16,7 +15,6 @@ Map::Map() : m_Renderer(nullptr), m_TilesetTexture(nullptr) {
         m_Height = 0;
         return;
     }
-
     // Đọc kích thước map
     file >> m_Width >> m_Height;
 
@@ -39,17 +37,8 @@ Map::Map() : m_Renderer(nullptr), m_TilesetTexture(nullptr) {
 
 void Map::Init(SDL_Renderer* renderer) {
     m_Renderer = renderer;
-
-    // Load tileset
-      SDL_Surface* tilesetSurface = IMG_Load("img/Map/0909.png");
-         if (!tilesetSurface) {
-        cout << "Khong load duoc tileset: " << SDL_GetError() << endl;
-        return;
-    }
+    SDL_Surface* tilesetSurface = IMG_Load("img/Map/0909.png");
     m_TilesetTexture = SDL_CreateTextureFromSurface(m_Renderer, tilesetSurface);
-    if (!m_TilesetTexture) {
-        std::cout << "Khong tao duoc texture: " << SDL_GetError() << std::endl;
-    }
     SDL_FreeSurface(tilesetSurface);
 }
 

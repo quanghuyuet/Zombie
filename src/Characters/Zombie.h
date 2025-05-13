@@ -13,7 +13,7 @@ public:
     Zombie(Properties* props); // Hàm khởi tạo
     virtual void Draw(); // Vẽ zombie
     virtual void Update(float dt); // Cập nhật trạng thái
-    virtual void Clean() {} // Dọn dẹp (hiện tại không dùng)
+    virtual void Clean() {} // Dọn dẹp
     virtual void TakeDamage(int damage); // Nhận sát thương
     Collider* GetCollider() { return m_Collider; } // Lấy collider
     virtual float GetDeathTime() { return m_DeathTime; } // Lấy thời gian chết

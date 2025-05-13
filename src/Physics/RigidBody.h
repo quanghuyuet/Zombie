@@ -1,44 +1,31 @@
 #pragma once
 #include "Vector2D.h"
 
-// Định nghĩa các hằng số cho vật lý và trò chơi
-#define UNI_MASS 1.0f           // Khối lượng mặc định của đối tượng
-#define GRAVITY 9.8f            // Gia tốc trọng lực mặc định
-#define FORWARD 1               // Hướng tiến (sang phải)
-#define BACKWARD -1             // Hướng lùi (sang trái)
-#define UPWARD -1               // Hướng lên (trong hệ tọa độ SDL, Y âm là lên)
-#define DOWNWARD 1              // Hướng xuống
-#define ATTACK_TIME 0.5f        // Thời gian thực hiện tấn công
-#define HIT_TIME 0.3f           // Thời gian hiệu ứng bị đánh
-#define DEAD_TIME 1.0f          // Thời gian hiệu ứng chết
-#define ATTACK_RANGE 50.0f      // Phạm vi tấn công
-#define MAX_VELOCITY_X 150.0f   // Vận tốc tối đa theo trục X
-#define SCREEN_WIDTH 1200       // Chiều rộng màn hình
-#define SCREEN_HEIGHT 640       // Chiều cao màn hình
+#define UNI_MASS 1.0f
+#define GRAVITY 9.8f
+#define FORWARD 1
+#define BACKWARD -1
+#define UPWARD -1
+#define DOWNWARD 1
+#define ATTACK_TIME 0.5f
+#define HIT_TIME 0.3f
+#define DEAD_TIME 1.0f
+#define ATTACK_RANGE 50.0f
+#define MAX_VELOCITY_X 150.0f
+#define SCREEN_WIDTH 1200
+#define SCREEN_HEIGHT 640
 
-// Lớp RigidBody để quản lý vật lý của đối tượng
 class RigidBody {
 public:
-    // Hàm khởi tạo RigidBody với các giá trị mặc định
     RigidBody() {
-        m_Mass = UNI_MASS;              // Khối lượng mặc định (1.0f)
-        m_Gravity = GRAVITY;            // Trọng lực mặc định (9.8f)
-        m_FrictionCoefficient = 1.0f;   // Hệ số ma sát mặc định
+        m_Mass = UNI_MASS;
+        m_Gravity = GRAVITY;
+        m_FrictionCoefficient = 1.0f;
     }
-
-    // Thiết lập khối lượng của đối tượng
     inline void SetMass(float mass) { m_Mass = mass; }
-
-    // Thiết lập gia tốc trọng lực
     inline void SetGravity(float gravity) { m_Gravity = gravity; }
-
-    // Thiết lập hệ số ma sát
     inline void SetFrictionCoefficient(float friction) { m_FrictionCoefficient = friction; }
-
-    // Áp dụng lực tổng quát (Vector2D) cho đối tượng
     inline void ApplyForce(Vector2D F) { m_Force = F; }
-
-    // Áp dụng lực theo trục X
     inline void ApplyForceX(float Fx) { m_Force.X = Fx; }
 
     // Áp dụng lực theo trục Y
